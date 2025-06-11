@@ -1,0 +1,10 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv" into library work
+INFO: [VRFC 10-311] analyzing module mux_tb
+ERROR: [VRFC 10-4982] syntax error near '=' [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:18]
+ERROR: [VRFC 10-4982] syntax error near '=' [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:19]
+ERROR: [VRFC 10-4982] syntax error near '=' [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:20]
+ERROR: [VRFC 10-4982] syntax error near '=' [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:21]
+ERROR: [VRFC 10-4982] syntax error near '=' [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:22]
+ERROR: [VRFC 10-4982] syntax error near '=' [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:23]
+WARNING: [VRFC 10-3824] variable 'tr' must explicitly be declared as automatic or static [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:26]
+ERROR: [VRFC 10-8530] module 'mux_tb' is ignored due to previous errors [C:/Vivado_projects/sv_projects/lab1_mux/sim/mux_tb.sv:4]
