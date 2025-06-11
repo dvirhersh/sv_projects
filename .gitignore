@@ -34,7 +34,7 @@
 # !*.slx
 # !*.bxml
 # #Simulation logic analyzer
-# !*.wcfg
+!*.wcfg
 # !*.coe
 # #MIG
 # # !*.prj
