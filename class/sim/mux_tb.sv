@@ -4,7 +4,7 @@ class stimulus;
     rand bit sel, a, b;
 
     function void display();
-        $display("sel=%0b a=%0b b=%0b", sel, a, b);
+        $display("sel = %0b, a = %0b, b = %0b", sel, a, b);
     endfunction
 endclass
 
@@ -46,7 +46,7 @@ module mux_tb;
             sel = s.sel; a = s.a; b = s.b;
             #5;
             s.display();
-            $display("y=%0b\n", y);
+            $display("y = %0b\n", y);
         end
         $finish;
     end
