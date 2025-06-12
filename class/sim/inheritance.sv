@@ -1,29 +1,32 @@
 class parent;
-    bit [3:0] a_vec;
-    bit       a_bit;
+    int p1;
 
-    function void print();
-        $display("parent: a_vec = %d, a_bit = %d", a_vec, a_bit);
+    function new(input int pp1);
+        p1 = pp1;
     endfunction
+
 endclass
 
 class child extends parent;
-    int  a_vec;
-    byte a_byte;
+    int c1;
+
+    function new(input int pp1, pc1);
+        super.new(pp1);
+        c1 = pc1;        
+    endfunction
 
     function void print();
-        super.print();
-        $display("child: a_vec = %0d, a_byte = 0x%h", a_vec, a_byte);
+        $display("child: p1 = %0d, c1 = %0d", p1, c1);
     endfunction
 endclass
 
 module inheritance;
-    child one = new();
+    child child1;
 
     initial begin
-        one.a_vec  = 4;     // from parent
-        one.a_bit  = 1'b1;  // from parent
-        one.a_byte = 8'hFF; // from child
-        one.print();
+        child1 = new(.pp1(4), .pc1(2));
+        child1.print();
+        child1.p1 = 9;
+        child1.print();
     end
 endmodule
