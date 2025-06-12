@@ -18,22 +18,37 @@ class randframe;
     }
 
     function void post_randomize();
-        // No need to manually assign with $urandom
         $display("Randomization completed for addr = %0h", addr);
     endfunction
 
-    function void print;
+    function void print();
         $display("addr = %0h, len = %0d, data_arr.size() = %0d", addr, len, data_arr.size());
         $write("data_arr = ");
         foreach (data_arr[i]) begin
             $write("0x%01x ", data_arr[i]);
         end
         $display("");
-    endfunction : print
+    endfunction
 endclass
 
 class shortframe extends randframe;
-    constraint length { len > 0; len < 3; }
+    constraint length { len inside {[1:3]}; }
+
+    function new(input bit [3:0] paddr);
+        super.new(paddr);
+    endfunction
+endclass
+
+class mediumframe extends randframe;
+    constraint length { len inside {[4:7]}; }
+
+    function new(input bit [3:0] paddr);
+        super.new(paddr);
+    endfunction
+endclass
+
+class longframe extends randframe;
+    constraint length { len inside {[8:15]}; }
 
     function new(input bit [3:0] paddr);
         super.new(paddr);
@@ -41,14 +56,23 @@ class shortframe extends randframe;
 endclass
 
 module rand_frame_len_module;
-    shortframe short_frame4 = new(5);
+    shortframe  short_frame4  = new(4'h5);
+    mediumframe medium_frame5 = new(4'h7);
+    longframe   long_frame6   = new(4'h9);
     int ok;
 
     initial begin
         ok = short_frame4.randomize();
-        if (!ok) $fatal(1, "Randomization failed");
+        if (!ok) $fatal(1, "Randomization failed for short_frame4");
+
+        ok = medium_frame5.randomize();
+        if (!ok) $fatal(1, "Randomization failed for medium_frame5");
+
+        ok = long_frame6.randomize();
+        if (!ok) $fatal(1, "Randomization failed for long_frame6");
+
         short_frame4.print();
+        medium_frame5.print();
+        long_frame6.print();
     end
-    
-    
 endmodule
