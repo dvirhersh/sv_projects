@@ -19,7 +19,6 @@ class baseframe;
         $display("addr = %0h, len = %0d, data_arr.size() = %0d", addr, len, data_arr.size());
         $write("data_arr = ");
         foreach (data_arr[i]) $write("0x%01x ", data_arr[i]);
-        $display("");
     endfunction
 
     function void iam();
@@ -35,20 +34,21 @@ class shortframe extends baseframe;
         super.new(paddr);
     endfunction
 
-  function void iam();
+    function void iam();
     $display("Short Frame");
-  endfunction
+    endfunction
 endclass
 
 module rand_frame_len_module;
     baseframe  bf;
-    shortframe sf = new(4'h5);
-    int ok;
+
+  shortframe sf1 = new(4'h5);
+  shortframe sf2;
 
     initial begin
-        bf = sf;
-
-    bf.iam();  // "Base Frame"
-//        bf.s1 = 1'b1; // error 
+        bf = sf1;
+        bf.iam(); // "Base Frame"
+        $cast(sf2, bf);
+        sf2.iam();
     end
 endmodule
