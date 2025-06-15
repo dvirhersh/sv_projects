@@ -1,4 +1,4 @@
-class baseframe;
+virtual class baseframe;
 
                    bit [3:0] addr;
     rand protected bit [3:0] len;
@@ -22,9 +22,9 @@ class baseframe;
         $display("");
     endfunction
 
-    virtual function void iam();
-        $display("Base Frame");
-    endfunction
+    pure virtual function void iam();
+//        $display("Base Frame");
+//    endfunction
 endclass
 
 
@@ -57,8 +57,8 @@ endclass
 
 
 module polymorphism;
-    baseframe frame[7:0];
-    shortframe sf;
+    baseframe   frame[7:0];
+    shortframe  sf;
     mediumframe mf;
     int ok;
 
