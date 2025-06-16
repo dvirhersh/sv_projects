@@ -30,15 +30,15 @@ module mux_tb;
     mux uut (.sel(sel), .a(a), .b(b), .y(y));
 
     stimulus s;
-     basicframe frame1 = new(.paddr(3));
-     basicframe frame2;
+        basicframe frame1 = new(.paddr(3));
+        basicframe frame2;
 
     initial begin
 
-         frame2 = new(.paddr(4));
-         frame1.addr = 5;
-         frame1.print();
-         frame2.print();
+        frame2 = new(.paddr(4));
+        frame1.addr = 5;
+        frame1.print();
+        frame2.print();
 
         s = new();
         repeat (5) begin
