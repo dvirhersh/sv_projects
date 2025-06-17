@@ -16,4 +16,11 @@ class pds_vc extends base;
         drv.run(count);
 	endtask : run
 
+    task configure(virtual pds_if ppif, int portno);
+        drv.pif     = ppif;
+        mon.pif     = ppif;
+        mon.portno  = portno;
+        seqr.portno = portno;
+    endtask : configure
+
 endclass : pds_vc
