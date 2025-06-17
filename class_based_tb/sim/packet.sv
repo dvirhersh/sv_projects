@@ -1,7 +1,6 @@
-class packet;
-	rand bit [3:0] source;
-	rand bit [3:0] target;
-	rand bit [7:0] data;
+class packet #(int DATA_WIDTH = 8);
+	rand bit [3:0] source, target;
+	rand bit [DATA_WIDTH-1:0] data;
     string         inst;
 	int			   pkt_num;
 
@@ -16,4 +15,9 @@ class packet;
 	function void print();
 		$display("Packet - Source: %0d, Target: %0d, Data: 0x%0h", source, target, data);
 	endfunction
+
+	function bit compare(packet p);
+		return (p.source == source && p.target == target && p.data == data);
+	endfunction
+
 endclass

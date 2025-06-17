@@ -25,9 +25,6 @@ module parent_handle;
         // Connect the virtual interface
         pds1.drv.pif = pif_inst;
 
-        // Link sequencer to driver
-        pds1.drv.sref = pds1.seqr;
-
         ptr = pds1.seqr;
 
         if (ptr != null) 
