@@ -1,4 +1,4 @@
-interface pds_if (input bit clk, reset);
+interface pds_if (input logic clk, input logic reset);
 	logic [15:0] data_ip;
 	logic [15:0] data_op;
 	logic        valid_up;
@@ -8,8 +8,10 @@ interface pds_if (input bit clk, reset);
 		@(negedge clk);
 		data_ip  = {pkt.source, pkt.target, pkt.data};
 		valid_up = 1;
+		valid_op = 0;
 		@(negedge clk);
 		valid_up = 0;
+		valid_op = 1;
 	endtask : drive_packet
 
 	task monitor(bit[3:0] portno);

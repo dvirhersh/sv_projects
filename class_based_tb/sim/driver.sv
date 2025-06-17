@@ -17,6 +17,7 @@ class driver extends base;
 
 	task send_to_dut(input packet pkt);
 		pif.drive_packet(pkt);  // Call the interface task
+		pkt.print();
 	endtask : send_to_dut
 
 	function void print();

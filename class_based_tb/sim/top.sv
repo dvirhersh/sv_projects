@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 `include "packet.sv"
 `include "psingle.sv"
 `include "pmulticast.sv"
@@ -15,8 +17,8 @@ module top;
     always #5 clock = ~clock;
 
     pds_if p0 (clock, reset);
+    pds_if p1 (clock, reset);
 
-    // 2. Class-based environment
     pds_vc port0 = new("port0", null); // construct
     base   ptr;
     packet pkt;
@@ -26,20 +28,22 @@ module top;
     initial begin
 
         port0.configure(.ppif(p0), .portno(0));
+
+        port0.setpolicy(rnd);
         port0.run(3);
+
+        port0.setpolicy(sgle);
+        port0.run(6);
 
         // Connect the virtual interface
         port0.drv.pif = p0;
 
         ptr = port0.seqr;
 
-        if (ptr != null) 
-            $display("ptr.inst = %s", ptr.inst);
+        if (ptr != null) $display("ptr.inst = %s", ptr.inst);
 
-        if (ptr.parent != null) 
-            $display("ptr.parent.inst = %s", ptr.parent.inst);
-        else 
-            $display("ptr.parent = null");
+        if (ptr.parent != null) $display("ptr.parent.inst = %s", ptr.parent.inst);
+        else $display("ptr.parent = null");
 
         port0.seqr.print();  // Expected: @ port0.seqr
         port0.drv.print();
@@ -52,5 +56,6 @@ module top;
         // Drive packet through driver
         port0.drv.run(1);  // Run the driver for 1 transaction
     end
+
 
 endmodule

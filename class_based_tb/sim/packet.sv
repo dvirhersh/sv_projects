@@ -13,7 +13,7 @@ class packet #(int DATA_WIDTH = 8);
 	endfunction
 
 	function void print();
-		$display("Packet - Source: %0d, Target: %0d, Data: 0x%0h", source, target, data);
+		$display("@%0t pS Packet - Source: %0h, Target: %0h, Data: 0x%0h", $time, source, target, data);
 	endfunction
 
 	function bit compare(packet p);

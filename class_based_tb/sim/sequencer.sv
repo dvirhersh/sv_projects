@@ -1,32 +1,44 @@
+typedef enum {sgle, mult, rnd} 
+    seqr_ctrl_e;
+
 class sequencer extends base;
 
-    int        ok;
-    int        portno;
-    psingle    single;
-    pmulticast multi;
+    int         ok;
+    int         portno;
+    psingle     sone;
+    pmulticast  mone;
+    seqr_ctrl_e seqr_ctrl;
+    
 
     function new(input string name, base up);
         super.new(name, up);
     endfunction
 
     function void get_next_item(output packet pkt);
-        randcase
-        1: begin
-            single = new();
-            single.source = portno;
-            ok = single.randomize();
+        case (seqr_ctrl)
+        sgle :begin
+            sone = new("sone");
+            sone.source = portno;
+            ok = sone.randomize();
             if (!ok) 
-                $fatal("Failed to randomize psingle");
-            pkt = single;
+                $fatal(1, "Failed to randomize psingle");
+            pkt = sone;
         end
-        2: begin
-            multi = new();
-            multi.source = portno;
-            ok = multi.randomize();
+        mult :begin
+            mone = new();
+            mone.source = portno;
+            ok = mone.randomize();
             if (!ok) 
-                $fatal("Failed to randomize pmulticast");
-            pkt = multi;
+                $fatal(1, "Failed to randomize pmulticast");
+            pkt = mone;
         end
+        rnd :begin
+            if ($urandom_range(0, 1) == 0) 
+                seqr_ctrl = sgle;
+            else 
+                seqr_ctrl = mult;
+            get_next_item(pkt);  // Recursive call with now-resolved policy  
+        end 
         endcase
     endfunction : get_next_item
 
