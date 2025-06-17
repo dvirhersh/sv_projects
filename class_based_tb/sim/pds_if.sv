@@ -1,6 +1,8 @@
 interface pds_if (input bit clk, reset);
 	logic [15:0] data_ip;
+	logic [15:0] data_op;
 	logic        valid_up;
+	logic        valid_op;
 
 	task drive_packet(input packet pkt);
 		@(negedge clk);
@@ -9,6 +11,15 @@ interface pds_if (input bit clk, reset);
 		@(negedge clk);
 		valid_up = 0;
 	endtask : drive_packet
+
+	task monitor(bit[3:0] portno);
+		packet pkt0;
+		forever begin
+			@(posedge valid_op) pkt0 = new("pkt", 0);
+			{pkt0.source, pkt0.target, pkt0.data} = data_op;
+		end
+		
+	endtask : monitor
 
 	// modport dut(input data_ip, valid_up, clk, reset);
 	// modport drv(output data_ip, valid_up, input clk, reset);

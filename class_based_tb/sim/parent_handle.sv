@@ -6,6 +6,7 @@
 `include "pds_vc.sv"
 `include "pds_if.sv"
 `include "driver.sv"
+`include "monitor.sv"
 
 module parent_handle;
 
