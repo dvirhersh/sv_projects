@@ -24,13 +24,13 @@ module simple_class;
 
     initial begin
         frame1.print();
-        
-        frame2 = new(4'd4);
-        frame1.addr = 4'd5;
 
+        frame1.addr = 4'd5;
         frame1.print();
+
+        frame2 = new(4'd4);
         frame2.print();
 
-        $finish;
+        $stop;
     end
 endmodule
