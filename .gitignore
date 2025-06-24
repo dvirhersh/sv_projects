@@ -16,3 +16,11 @@
 *.vcd
 *.webtalk
 .*pb
+
+# for ModelSim
+*work
+*.mti
+*.mpf
+*.bak
+*.wlf
+*wlft*
