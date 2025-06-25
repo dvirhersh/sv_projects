@@ -23,10 +23,10 @@ module SimpleInheritReview;
     child one = new();
 
     initial begin
-        one.super.avec = 3;  // Explicitly set parent's avec
-        one.avec       = 4;  // Child's avec
+        one.super.avec = 3;
+        one.avec       = 4;
         one.abit       = 1'b1;
-        one.abyte      = 8'hff;  // Will now display as 0xFF
+        one.abyte      = 8'hff;
         one.print();
     end
 endmodule
