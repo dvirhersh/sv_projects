@@ -1,12 +1,11 @@
 `timescale 1ns / 1ps
 
-class RandFrame3;
+class RandFrame;
 
          local bit [3:0] addr;
     rand local bit [3:0] len;
     rand       bit [7:0] data_arr[];
 
-    // Constructor
     function new(input bit [3:0] paddr);
         addr = paddr;
     endfunction
@@ -18,18 +17,19 @@ class RandFrame3;
         len > 0; }
 
     function void print();
+        $display("=== RandFrame Info ===");
         $display("addr = 0x%0h, len = %0d, data_arr.size() = %0d", addr, len, data_arr.size());
         $write("data_arr = ");
         foreach (data_arr[i]) 
             $write("0x%02x ", data_arr[i]);
-        $display();
+        $display("\n=======================");
     endfunction
 
 endclass
 
 
 module ClassConstraintsModule;
-    RandFrame3 frame1 = new(4'd5);
+    RandFrame frame1 = new(4'd5);
     int ok;
 
     initial begin

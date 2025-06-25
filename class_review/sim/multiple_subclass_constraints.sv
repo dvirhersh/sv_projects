@@ -32,26 +32,50 @@ class RandFrame;
 endclass
 
 class ShortFrame extends RandFrame;
-
   constraint length {len > 0; len < 4;}
 
   function new(input bit [3:0] paddr);
     super.new(paddr);
   endfunction
+endclass
 
-endclass : ShortFrame
+class MediumFrame extends RandFrame;
+    constraint length {len > 3; len < 8;}
 
-module SubClassConstraints;
-    ShortFrame sframe = new(4'd5);
+    function new(input bit [3:0] paddr);
+        super.new(paddr);
+    endfunction
+endclass
+
+class LongFrame extends RandFrame;
+    constraint length {len > 7; len < 16;}
+
+    function new(input bit [3:0] paddr);
+        super.new(paddr);
+    endfunction
+endclass
+
+module MultipleSubClassConstraints;
+    ShortFrame  sframe = new(4'd5);
+    MediumFrame mframe = new(4'd14);
+    LongFrame   lframe = new(4'd14);
     int ok;
 
     initial begin
         ok = sframe.randomize();
         if (!ok)
             $fatal(1, "Randomization failed for sframe");
-//        sframe.len = 5;
         sframe.print();
 
+        ok = mframe.randomize();
+        if (!ok)
+            $fatal(1, "Randomization failed for mframe");
+        mframe.print();
+
+        ok = lframe.randomize();
+        if (!ok)
+            $fatal(1, "Randomization failed for lframe");
+        lframe.print();
         $stop;
     end
 endmodule

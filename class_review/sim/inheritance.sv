@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-class parent;
+class Parent;
     bit b1;
 
     function new(input int p1);
@@ -8,11 +8,11 @@ class parent;
     endfunction
 
     function void print();
-        $display("parent: b1 = %0d", b1);
+        $display("Parent: b1 = %0d", b1);
     endfunction
 endclass
 
-class child extends parent;
+class Child extends Parent;
     bit [1:0] p1;
 
     function new(input bit [1:0] p1);
@@ -21,26 +21,26 @@ class child extends parent;
     endfunction
 
     function void print();
-        super.print();  // print b1 from parent
-        $display("child : p1 = %0d", p1);
+        super.print();  // print b1 from Parent
+        $display("Child : p1 = %0d", p1);
     endfunction
 endclass
 
-class grandchild extends child;
+class GrandChild extends Child;
     function new(input bit p1);
         super.new(p1);
     endfunction
 
     function void print();
         super.print();
-        $display("grandchild: no extra fields");
+        $display("GrandChild: no extra fields");
     endfunction
 endclass
 
 module inheritance;
-    parent     parent1;
-    child      child2;
-    grandchild grandchild3;
+    Parent     parent1;
+    Child      child2;
+    GrandChild grandchild3;
 
     initial begin
         parent1     = new(1'b1);

@@ -4,9 +4,8 @@ class RandFrame;
 
          local bit [3:0] addr;
     rand local bit [3:0] len;
-         bit [7:0] data_arr[];
+               bit [7:0] data_arr[];
 
-    // Constructor
     function new(input bit [3:0] paddr);
         addr = paddr;
     endfunction
@@ -22,7 +21,6 @@ class RandFrame;
             data_arr[i] = $urandom;
     endfunction
 
-    // Prin the frame content
     function void print();
         $display("=== RandFrame Info ===");
         $display("addr = 0x%0h, len = %0d, data_arr.size() = %0d", addr, len, data_arr.size());
