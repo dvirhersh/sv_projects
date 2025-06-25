@@ -16,7 +16,7 @@ class Student extends Person;
         student_id = id;
     endfunction
 
-    function void print_info();
+    function void print();
         $display("Student -> Age = %0d, ID = %0d", age, student_id);
     endfunction
 endclass
@@ -26,11 +26,10 @@ module InheritAndConstructor;
 
     initial begin
         student1 = new(.init_age(21), .id(1002));
-        if (student1 != null) begin
-            student1.age = 22;  // updating age after creation
-            student1.print_info();
-        end else begin
+        if (student1 != null) 
+            student1.age = 22;
+            student1.print();
+        else
             $display("Error: Failed to create Student object.");
-        end
     end
 endmodule
