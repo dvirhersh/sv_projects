@@ -41,7 +41,7 @@ module InLineConstraintsModule;
             $fatal("Randomization failed (range 1–7)");
         frame1.print();
 
-        ok = frame1.randomize() with {len dist { [1 :  7] := 1, [8 : 15] := 2}; };
+        ok = frame1.randomize() with {len dist { [1:7]:=1, [8:15]:=2}; };
         if (!ok) 
             $fatal("Randomization failed (dist)");
         frame1.print();
