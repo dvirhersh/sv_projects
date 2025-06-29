@@ -56,4 +56,28 @@ package class_operations;
         endfunction
     endclass
 
+    class Basic;
+        bit [7:0] b1;
+        string printaa[string];
+
+        virtual function void makepq();
+            string str;
+            str.hextoa(b1); // hex to ascii
+            printaa["b1"] = {"b1 = 0x", str};
+        endfunction
+    endclass
+
+    class Child extends Basic;
+        // Hides b1 from Basic, so use a new name or use `super.b1`
+        bit [15:0] b1;
+
+        // Override function
+        virtual function void makepq();
+            string str;
+            super.makepq();
+            str.itoa(b1);  // integer to ascii
+            printaa["b1"] = {"b1 = ", str};
+        endfunction
+    endclass
+
 endpackage
