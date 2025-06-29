@@ -28,10 +28,10 @@ package p1;
         endfunction
     endclass : sub
 
-    class Basic;
-        virtual function void iam();
-            $display("I'm a Basic");            
-        endfunction : iam
+    virtual class Basic;
+        pure virtual function void iam();
+        //     $display("I'm a Basic");            
+        // endfunction
     endclass
 
     class Parent extends Basic;
