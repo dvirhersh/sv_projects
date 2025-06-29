@@ -61,5 +61,32 @@ package p1;
         endfunction : iam
     endclass
 
+    class stack #(type st = int, int depth = 5);
+        local st  data[depth];
+        local int pointer = 0;
+
+        // Push: returns 0 on success, -1 on overflow
+        function int push(input st indat);
+            if (pointer >= depth) begin
+                return -1;  // overflow
+            end
+            data[pointer] = indat;
+            pointer++;
+            return 0;
+        endfunction : push
+
+        // Pop: returns 0 on success, -1 on underflow
+        function int pop(output st outdat);
+            if (pointer <= 0) begin
+                return -1;  // underflow
+            end
+            pointer--;
+            outdat = data[pointer];
+            return 0;
+        endfunction : pop
+
+  endclass : stack
+
+
 endpackage : p1
   
