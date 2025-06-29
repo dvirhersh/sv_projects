@@ -1,49 +1,30 @@
-class baseframe;
-    bit [3:0] addr;
+import class_operations::*;
 
-    function new(input bit [3:0] paddr);
-        addr = paddr;
-    endfunction
-
-    function void post_randomize();
-        $display("Randomization completed for addr = %0h", addr);
-    endfunction
-
-    function void print();
-        $display("addr = %0h", addr);
-        $display("");
-    endfunction
-endclass
-
-class multiframe;
-    int num;
-    baseframe f1;
-    
-    function new(input bit[3:0] f1adr);
-        f1 = new(f1adr);
-    endfunction
-endclass
-
-module ref_copy;
+module RefCopy;
 
     baseframe b1, b2, b3;
     multiframe m1, m2;
 
     initial begin
         b1 = new(5);
-        b1.addr = 8;
-
+        
         // == Reference Copy ==
         b2 = b1; // copy
         $display("\n== Rerference copy ==\n");
+        b1.addr = 8;
         $display("b2.addr = %0d", b2.addr); 
-
-        b3 = new(0);
+        b1 = null;
+        
+        // Clone
+        b1 = new(5);
+        b3 = new(1);
         b3.addr = b1.addr;
         $display("b3.addr = %0d", b3.addr); 
-        // b3 = new b1;
-        // $display("b3.addr = %0d", b3.addr);
-        // b1 = null;
+        b3 = null;
+        // Easier clone
+        b3 = new b1;
+        b3.addr = 11;
+        $display("b3.addr = %0d", b3.addr);
 
         // Shallow and Deep Clone
         m1 = new(0);
