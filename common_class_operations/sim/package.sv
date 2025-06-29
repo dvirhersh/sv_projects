@@ -34,16 +34,16 @@ package class_operations;
         function void print(format_e format = HEX);
         begin
             case (format)
-                HEX: $display("a_byte: 0x%0h", a_byte);
-                BIN: $display("a_byte: 0b%0b", a_byte);
-                DEC: $display("a_byte: %0d"  , a_byte);
+                HEX: $display("a_byte: 0x'%0h", a_byte);
+                BIN: $display("a_byte: 0b'%0b", a_byte);
+                DEC: $display("a_byte: 0d'%0d"  , a_byte);
                 default: $display("a_byte: unknown format");
             endcase
         end
         endfunction
 
         virtual function void print_p();
-            $display("a_byte = %0h", a_byte);
+            $display("a_byte = d'%0d", a_byte);
         endfunction
     endclass
 
@@ -52,7 +52,7 @@ package class_operations;
 
         virtual function void print_p();
             super.print_p();
-            $display("nibble = %0h", nibble);
+            $display("nibble = d'%0d", nibble);
         endfunction
     endclass
 
