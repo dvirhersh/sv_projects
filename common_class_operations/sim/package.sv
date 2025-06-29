@@ -17,7 +17,7 @@ package class_operations;
     endclass
 
     class multiframe;
-        int num;
+        int       num;
         baseframe f1;
 
         function new(input bit [3:0] f1adr);

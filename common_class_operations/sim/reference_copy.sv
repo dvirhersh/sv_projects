@@ -27,7 +27,7 @@ module RefCopy;
         $display("b3.addr = %0d", b3.addr);
 
         // Shallow and Deep Clone
-        m1 = new(0);
+        m1 = new(4);
         m1.num = 5;
         m2 = new m1; // shallow clone
 
@@ -42,11 +42,13 @@ module RefCopy;
         m2 = null;
 
         // Deep Cloning
-        m1 = new(0);
+        m1 = new(7);
         m1.num = 5;
-        m2 = new(0);
+        
+        m2 = new(8);
         m2.num = m1.num;
         m2.f1.addr = m1.f1.addr;
+        
         m1.f1.addr = 9;
         $display("\n== deep clone ==\n");
         $display("m1.num = %0d, m2.num = %0d", m1.num, m2.num); // m2.num is independent
