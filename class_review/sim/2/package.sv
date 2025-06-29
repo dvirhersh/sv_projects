@@ -28,5 +28,38 @@ package p1;
         endfunction
     endclass : sub
 
+    class Basic;
+        virtual function void iam();
+            $display("I'm a Basic");            
+        endfunction : iam
+    endclass
+
+    class Parent extends Basic;
+        bit [3:0] avec;
+        bit       abit;
+
+        function void print();
+            $display("Parent: avec = %0d, abit = %0b", avec, abit);
+        endfunction
+
+        virtual function void iam();
+            $display("I'm a Parent");            
+        endfunction : iam
+  endclass
+
+    class Child extends Parent;
+        int       avec;  // Shadows Parent.avec
+        bit [7:0] abyte;
+
+        function void print();
+            super.print();
+            $display("Child : avec = %0d, abyte = 0x%0h", this.avec, abyte);
+        endfunction
+
+        virtual function void iam();
+            $display("I'm a Child");            
+        endfunction : iam
+    endclass
+
 endpackage : p1
   
