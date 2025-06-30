@@ -3,10 +3,13 @@ package class_operations;
     typedef enum {HEX, BIN, DEC} format_e;
 
     class baseframe;
-        bit [3:0] addr;
+                  bit       b1;
+                  bit [3:0] addr;
+        protected string    inst;
 
-        function new(input bit [3:0] paddr);
+        function new(input bit [3:0] paddr, input string pst = "");
             addr = paddr;
+            inst = pst;
         endfunction
 
         function void post_randomize();
@@ -15,16 +18,33 @@ package class_operations;
 
         function void print();
             $display("addr = %0h", addr);
+            $display("b1 = %b", b1);
             $display("");
+        endfunction
+
+        function string getname();
+            return inst;
+        endfunction
+
+        function void setname(input string pst);
+            inst = pst;
         endfunction
     endclass
 
     class multiframe;
         int       num;
-        baseframe f1;
+        baseframe frame1;
+        baseframe frame2;
+
+        function void print();
+            $display("num = %0d", num);
+            frame1.print();
+            frame2.print();
+        endfunction
 
         function new(input bit [3:0] f1adr);
-            f1 = new(f1adr);
+            frame1 = new(f1adr);
+            frame2 = new(f1adr);
         endfunction
     endclass
 
