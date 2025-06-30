@@ -17,9 +17,8 @@ package class_operations;
         endfunction
 
         function void print();
-            $display("addr = %0h", addr);
-            $display("b1 = %b", b1);
-            $display("");
+            $display(inst, ".addr = %0h", addr);
+            $display(inst, ".b1 = %b", b1);
         endfunction
 
         function string getname();
@@ -35,16 +34,16 @@ package class_operations;
         int       num;
         baseframe frame1;
         baseframe frame2;
+        
+        function new(input bit [3:0] f1adr);
+            frame1 = new(f1adr, "frame1");
+            frame2 = new(f1adr, "frame2");
+        endfunction
 
         function void print();
             $display("num = %0d", num);
             frame1.print();
             frame2.print();
-        endfunction
-
-        function new(input bit [3:0] f1adr);
-            frame1 = new(f1adr);
-            frame2 = new(f1adr);
         endfunction
     endclass
 
