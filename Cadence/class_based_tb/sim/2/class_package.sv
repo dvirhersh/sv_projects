@@ -18,13 +18,32 @@ package class_package;
 			return parent;
 		endfunction
 
+		function string pathname();
+			base ptr = this;
+			pathname = inst;
+			while (ptr.get_parent() != null) begin
+				ptr = ptr.get_parent();
+				pathname = {ptr.get_name(), ".", pathname};
+			end
+			
+		endfunction : pathname
+
 	endclass : base
 
 	class sequencer extends base;
 
+		int 	   ok;
+		int        portno;
+		// psingle    single;
+		// pmulticast multi;
+
 		function new(input string name, base up);
 			super.new(name, up);
 		endfunction
+
+		function void print();
+			$display("@ ",this.pathname());
+		endfunction : print
 
 	endclass : sequencer
 
@@ -38,5 +57,16 @@ package class_package;
 		endfunction
 
 	endclass : pds_vc
+
+	class testbench extends base;
+
+		pds_vc pds1;
+
+		function new(input string name, base up);
+			super.new(name, up);
+			pds1 = new("pds1", this);
+		endfunction
+
+  endclass : testbench
 
 endpackage : class_package
