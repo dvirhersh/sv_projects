@@ -2,23 +2,41 @@ import class_package::*;
 
 module parent_handle;
 
-	testbench tb1  = new("tb1", null);
+	testbench tb1 = new("tb1", null);
 	base      ptr;
+	Packet    pkt;
+	sequencer seqr;  // local alias to simplify access
 
 	initial begin
+		seqr = tb1.pds1.seqr;
 
-		tb1.pds1.seqr.print();
+		// Print initial info
+		seqr.print();
 
-		ptr = tb1.pds1.seqr;
-		$display("1 ptr.inst = %0s", ptr.get_name());
-		ptr = ptr.get_parent();
-		$display("2 ptr.inst = %0s", ptr.get_name());
-		ptr = ptr.get_parent();
-		$display("3 ptr.inst = %0s", ptr.get_name());
-		ptr = ptr.get_parent();
-		if (ptr != null) 
-			$display("4 Parent instance: %0s", ptr.get_name());
-		else 
-			$display("4 Reached top-level (no parent)");
+		// Walk up the parent chain
+		ptr = seqr;
+		for (int i = 1; i <= 10; i++) begin
+			if (ptr != null) 
+				$display("%0d ptr.inst = %0s", i, ptr.get_name());
+			else begin
+				$display("%0d Reached top-level (no parent)", i);
+				break;
+			end
+			ptr = ptr.get_parent();
+		end
+
+		// Generate and print packets
+		seqr.portno = 5;
+
+		// Once
+		seqr.get_next_item(pkt);
+		pkt.print("TB: ");
+
+		// Loop
+		for (int i = 0; i < 10; i++) begin
+			seqr.get_next_item(pkt);
+			pkt.print($sformatf("TB[%0d]: ", i));
+		end
 	end
+
 endmodule : parent_handle
