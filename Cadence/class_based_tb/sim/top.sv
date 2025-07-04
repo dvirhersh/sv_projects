@@ -1,14 +1,15 @@
 `timescale 1ns / 1ns
 
-`include "packet.sv"
-`include "psingle.sv"
-`include "pmulticast.sv"
-`include "base.sv"
-`include "sequencer.sv"
+// `include "packet.sv"
+// `include "psingle.sv"
+// `include "pmulticast.sv"
+// `include "base.sv"
+// `include "sequencer.sv"
+import package_like_uvm::*;
 `include "pds_if.sv"
-`include "pds_vc.sv"
-`include "driver.sv"
-`include "monitor.sv"
+// `include "driver.sv"
+// `include "monitor.sv"
+// `include "pds_vc.sv"
 
 module top;
 

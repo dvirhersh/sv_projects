@@ -1,8 +1,4 @@
-typedef enum {
-  sgle,
-  mult,
-  rnd
-} seqr_ctrl_e;
+typedef enum {sgle, mult, rnd} seqr_ctrl_e;
 
 class sequencer extends base;
 

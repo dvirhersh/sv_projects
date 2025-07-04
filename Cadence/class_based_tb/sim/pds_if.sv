@@ -17,7 +17,8 @@ interface pds_if (input logic clk, input logic reset);
 	task monitor(bit[3:0] portno);
 		packet pkt0;
 		forever begin
-			@(posedge valid_op) pkt0 = new("pkt", 0);
+			@(posedge valid_op) 
+				pkt0 = new("pkt", 0);
 			{pkt0.source, pkt0.target, pkt0.data} = data_op;
 		end
 		
