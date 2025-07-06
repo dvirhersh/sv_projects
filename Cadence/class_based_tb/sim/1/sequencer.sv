@@ -6,7 +6,6 @@ class sequencer extends base;
     pmulticast  mone;
     seqr_ctrl_e seqr_ctrl;
     
-
     function new(input string name, base up);
         super.new(name, up);
     endfunction

@@ -1,4 +1,4 @@
-`timescale 1ns / 1ns
+`timescale 1ns / 1ps
 
 import package_like_uvm::*;
 `include "pds_if.sv"
@@ -33,10 +33,13 @@ module top;
 
         ptr = port0.seqr;
 
-        if (ptr != null) $display("ptr.inst = %s", ptr.inst);
+        if (ptr != null) 
+            $display("ptr.inst = %s", ptr.inst);
 
-        if (ptr.parent != null) $display("ptr.parent.inst = %s", ptr.parent.inst);
-        else $display("ptr.parent = null");
+        if (ptr.parent != null) 
+            $display("ptr.parent.inst = %s", ptr.parent.inst);
+        else 
+            $display("ptr.parent = null");
 
         port0.seqr.print();  // Expected: @ port0.seqr
         port0.drv.print();
