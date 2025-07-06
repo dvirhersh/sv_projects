@@ -1,15 +1,7 @@
 `timescale 1ns / 1ns
 
-// `include "packet.sv"
-// `include "psingle.sv"
-// `include "pmulticast.sv"
-// `include "base.sv"
-// `include "sequencer.sv"
 import package_like_uvm::*;
 `include "pds_if.sv"
-// `include "driver.sv"
-// `include "monitor.sv"
-// `include "pds_vc.sv"
 
 module top;
 
@@ -57,6 +49,5 @@ module top;
         // Drive packet through driver
         port0.drv.run(1);  // Run the driver for 1 transaction
     end
-
 
 endmodule

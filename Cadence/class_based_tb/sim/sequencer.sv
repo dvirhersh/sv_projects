@@ -1,5 +1,3 @@
-typedef enum {sgle, mult, rnd} seqr_ctrl_e;
-
 class sequencer extends base;
 
     int         ok;
