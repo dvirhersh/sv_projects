@@ -19,34 +19,34 @@ module dut (
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-        state     <= IDLE;
-        buffer    <= 8'h00;
-        out_valid <= 1'b0;
-        in_ready  <= 1'b1;
-        end else begin
-        case (state)
-            IDLE: begin
-            if (in_valid && in_ready) begin
-                buffer   <= in_data;
-                in_ready <= 1'b0;
-                state    <= BUSY;
-            end
+            state     <= IDLE;
+            buffer    <= 8'h00;
             out_valid <= 1'b0;
-            end
+            in_ready  <= 1'b1;
+        end else begin
+            case (state)
+                IDLE: begin
+                    if (in_valid && in_ready) begin
+                        buffer   <= in_data;
+                        in_ready <= 1'b0;
+                        state    <= BUSY;
+                    end
+                    out_valid <= 1'b0;
+                end
 
-            BUSY: begin
-            state <= DONE;
-            end
+                BUSY: begin
+                    state <= DONE;
+                end
 
-            DONE: begin
-            out_valid <= 1'b1;
-            if (out_ready) begin
-                out_valid <= 1'b0;
-                in_ready  <= 1'b1;
-                state     <= IDLE;
-            end
-            end
-        endcase
+                DONE: begin
+                    out_valid <= 1'b1;
+                    if (out_ready) begin
+                        out_valid <= 1'b0;
+                        in_ready  <= 1'b1;
+                        state     <= IDLE;
+                    end
+                end
+            endcase
         end
     end
 

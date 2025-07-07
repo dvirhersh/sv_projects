@@ -17,6 +17,15 @@ module top;
     packet pkt;
 
     // switch dut (p0, ...) // DUT
+  // Instantiate the DUT
+  dut DUT (
+    .clk       (p0.clk),
+    .rst_n     (p0.reset),
+    .in_data   (p0.data_ip),
+    .in_valid  (p0.valid_up),
+    .out_data  (p0.data_op),
+    .out_valid (p0.valid_op)
+  );
 
     initial begin
 
