@@ -13,10 +13,10 @@
     parameter ALGN_DATA_WIDTH = 32,
     parameter FIFO_DEPTH      = 8,
     
-    localparam int unsigned APB_ADDR_WIDTH    = 16,
-    localparam int unsigned APB_DATA_WIDTH    = 32,
-    localparam int unsigned ALGN_OFFSET_WIDTH = ALGN_DATA_WIDTH <= 8 ? 1 : $clog2(ALGN_DATA_WIDTH/8),
-    localparam int unsigned ALGN_SIZE_WIDTH   = $clog2(ALGN_DATA_WIDTH/8)+1
+    localparam APB_ADDR_WIDTH    = 16,
+    localparam APB_DATA_WIDTH    = 32,
+    localparam ALGN_OFFSET_WIDTH = ALGN_DATA_WIDTH <= 8 ? 1 : $clog2(ALGN_DATA_WIDTH/8),
+    localparam ALGN_SIZE_WIDTH   = $clog2(ALGN_DATA_WIDTH/8)+1
   ) (
     input wire clk,
     input wire reset_n,
@@ -47,7 +47,7 @@
     output reg                        irq
   );
     
-    localparam int unsigned STATUS_CNT_DROP_WIDTH = 8;
+    localparam STATUS_CNT_DROP_WIDTH = 8;
     
     cfs_aligner_core#(
       .APB_ADDR_WIDTH( APB_ADDR_WIDTH),

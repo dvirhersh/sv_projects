@@ -1,7 +1,7 @@
 `ifndef CFS_ALGN_TEST_REG_ACCESS_SV
 	`define CFS_ALGN_TEST_REG_ACCESS_SV
 
-	class csf_algn_test_reg_access extends uvm_algn_test_base;
+	class csf_algn_test_reg_access extends cfs_algn_test_base;
 
 		`uvm_componect_utils(csf_algn_test_reg_access)
 
