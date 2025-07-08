@@ -27,7 +27,7 @@ module testbench();
 		$dumpfile("dump.vcd");
 		$dumpvars;
 
-		run_test("");
+		run_test("cfs_algn_test_reg_access");
 	end
 
 	cfs_aligner dut(
