@@ -1,15 +1,16 @@
-`include "cfs_algn_test_pkg.sv"
+`include "../test/cfs_algn_test_pkg.sv"
 
-module testbench ();
+module testbench();
 
 	import uvm_pkg::*;
 	import cfs_algn_test_pkg::*;
-	
+
 	reg clk;
+
 	initial begin
 		clk = 0;
 		forever begin
-			clk = #5ns ~clk;			
+			clk = #5ns ~clk;
 		end
 	end
 
@@ -29,7 +30,7 @@ module testbench ();
 		run_test("");
 	end
 
-	csf_aligner dut(
+	cfs_aligner dut(
 		.clk(    clk),
 		.reset_n(reset_n)
 	);

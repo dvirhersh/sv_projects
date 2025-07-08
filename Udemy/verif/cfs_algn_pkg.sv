@@ -3,7 +3,7 @@
 
 	`include "uvm_macros.svh"
 
-	package cfg_algn_pkg;
+	package cfs_algn_pkg;
 		import uvm_pkg::*;
 		
 		`include "cfs_algn_env.sv"
