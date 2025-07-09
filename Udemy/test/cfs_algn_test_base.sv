@@ -15,8 +15,8 @@
 			super.build_phase(phase);
 
 			env = cfs_algn_env::type_id::create("env", this);
-		endfunction : build_phase
-		
-	endclass : cfs_algn_test_base
+		endfunction
+
+	endclass
 
 `endif

@@ -7,9 +7,8 @@
 	package cfs_algn_pkg;
 		import uvm_pkg::*;
 		import cfs_apb_pkg::*;
-		
+
 		`include "cfs_algn_env.sv"
-		
 	endpackage
 
 `endif

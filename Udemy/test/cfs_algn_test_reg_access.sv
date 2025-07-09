@@ -13,14 +13,12 @@
 			phase.raise_objection(this, "TEST_DONE");
 
 			`uvm_info("DEBUG", "start of test", UVM_LOW)
-
 			#(100ns);
-
 			`uvm_info("DEBUG", "end of test", UVM_LOW)
 
 			phase.drop_objection(this, "TEST_DONE");
 		endtask
 
-	endclass : cfs_algn_test_reg_access
+	endclass
 
 `endif
