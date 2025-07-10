@@ -13,27 +13,27 @@
         endfunction
 
         virtual task body();
-                  cfs_apb_item_drv item;// = cfs_apb_item_drv::type_id::create("item");
+    //       cfs_apb_item_drv item = cfs_apb_item_drv::type_id::create("item");
 
-                //   void'(item.randomize() with {
-                //     dir  == CFS_APB_READ;
-                //     //Pay attention to the "local::" in order to avoid name confusion
-                //     addr == local::addr;
-                //   });
-                //   start_item(item);
-                //   finish_item(item);
+    //       void'(item.randomize() with {
+    //         dir  == CFS_APB_READ;
+    //         //Pay attention to the "local::" in order to avoid name confusion
+    //         addr == local::addr;
+    //       });
+    //       start_item(item);
+    //       finish_item(item);
 
-            //       void'(item.randomize() with {
-            //         dir  == CFS_APB_WRITE;
-            //         //Pay attention to the "local::" in order to avoid name confusion
-            //         addr == local::addr;
-            //         data == wr_data;
-            //       });
-            //       start_item(item);
-            //       finish_item(item);
+    //       void'(item.randomize() with {
+    //         dir  == CFS_APB_WRITE;
+    //         //Pay attention to the "local::" in order to avoid name confusion
+    //         addr == local::addr;
+    //         data == wr_data;
+    //       });
+    //       start_item(item);
+    //       finish_item(item);
 
-            //The above code can be replaced with `uvm_do macros
-            // cfs_apb_item_drv item;
+        //The above code can be replaced with `uvm_do macros
+        cfs_apb_item_drv item;
 
             `uvm_do_with(item, {
                 dir  == CFS_APB_READ;

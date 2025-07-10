@@ -10,15 +10,15 @@
 	`endif
 
 	interface cfs_apb_if (input pclk);
-		logic 								preset_n;
-		logic [`CFS_APB_MAX_ADDR_WIDTH-1:0] paddr;
-		logic 								pwrite;
-		logic 								psel;
-		logic 								penable;
-		logic [`CFS_APB_MAX_DATA_WIDTH-1:0] pwdata;
-		logic 								pready;
-		logic [`CFS_APB_MAX_DATA_WIDTH-1:0] prdata;
-		logic 								pslverr;
+		logic 							   preset_n;
+		logic[`CFS_APB_MAX_ADDR_WIDTH-1:0] paddr;
+		logic 							   pwrite;
+		logic 							   psel;
+		logic 							   penable;
+		logic[`CFS_APB_MAX_DATA_WIDTH-1:0] pwdata;
+		logic 							   pready;
+		logic[`CFS_APB_MAX_DATA_WIDTH-1:0] prdata;
+		logic 							   pslverr;
 	endinterface
 
 `endif

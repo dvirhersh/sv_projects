@@ -1,9 +1,7 @@
 `ifndef CFS_APB_DRIVER_SV
     `define CFS_APB_DRIVER_SV
 
-    class cfs_apb_driver extends uvm_driver #(
-        .REQ(cfs_apb_item_drv)
-    );
+    class cfs_apb_driver extends uvm_driver#(.REQ(cfs_apb_item_drv));
 
         cfs_apb_agent_config agent_config;
 
@@ -22,7 +20,7 @@
             cfs_apb_vif vif = agent_config.get_vif();
 
             `uvm_info("DEBUG", $sformatf("Driving \"%0s\": %0s", item.get_full_name(),
-                                        item.convert2string()), UVM_NONE)
+                                         item.convert2string()), UVM_NONE)
 
             for (int i = 0; i < item.pre_drive_delay; i++) begin
                 @(posedge vif.pclk);

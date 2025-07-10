@@ -40,7 +40,7 @@
 
 			if (get_vif() == null) begin
 				`uvm_fatal("ALGORITHM_ISSUE", "The APB virtual interface is not configured at
-							\"Start of simulation\" phase")
+						   \"Start of simulation\" phase")
 			end else begin
 				`uvm_info("APB_CONFIG", "The APB virtual interface is configured at
 						  \"Start of simulation\" phase", UVM_DEBUG)

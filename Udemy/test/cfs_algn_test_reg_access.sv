@@ -17,19 +17,21 @@
 			fork
 				begin
 					cfs_apb_sequence_simple seq_simple = cfs_apb_sequence_simple::type_id::create("seq_simple");
+
 					void'(seq_simple.randomize() with {
-						item.addr  == 'h0;
-						item.dir   == CFS_APB_WRITE;
-						item.data  == 'h11;
-						});
+						item.addr == 'h0;
+						item.dir  == CFS_APB_WRITE;
+						item.data == 'h0011;
+					});
+
 					seq_simple.start(env.apb_agent.sequencer);
 				end
 
 				begin
 					cfs_apb_sequence_rw seq_rw = cfs_apb_sequence_rw::type_id::create("seq_rw");
-					void'(seq_rw.randomize() with {
-						addr == 'hC;
-						});
+
+					void'(seq_rw.randomize() with {addr == 'hC;});
+
 					seq_rw.start(env.apb_agent.sequencer);
 				end
 

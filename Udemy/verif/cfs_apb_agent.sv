@@ -1,11 +1,12 @@
 `ifndef CFS_APB_AGENT_SV
-	`define CFS_APB_AGENT_SV
+  `define CFS_APB_AGENT_SV
 
 	class cfs_apb_agent extends uvm_agent;
 
 		cfs_apb_agent_config agent_config;
-		cfs_apb_sequencer    sequencer;
 		cfs_apb_driver       driver;
+		cfs_apb_sequencer    sequencer;
+		cfs_apb_monitor      monitor;
 
 		`uvm_component_utils(cfs_apb_agent)
 
@@ -17,9 +18,11 @@
 			super.build_phase(phase);
 			agent_config = cfs_apb_agent_config::type_id::create("agent_config", this);
 
+			monitor = cfs_apb_monitor::type_id::create("monitor", this);
+
 			if (agent_config.get_active_passive() == UVM_ACTIVE) begin
-				sequencer = cfs_apb_sequencer::type_id::create("sequencer", this);
 				driver    = cfs_apb_driver::type_id::create("driver", this);
+				sequencer = cfs_apb_sequencer::type_id::create("sequencer", this);
 			end
 		endfunction
 
@@ -35,6 +38,8 @@
 			end else begin
 				agent_config.set_vif(vif);
 			end
+
+			monitor.agent_config = agent_config;
 
 			if (agent_config.get_active_passive() == UVM_ACTIVE) begin
 				driver.seq_item_port.connect(sequencer.seq_item_export);

@@ -11,6 +11,7 @@
 
 		`include "cfs_algn_test_base.sv"
 		`include "cfs_algn_test_reg_access.sv"
+
 	endpackage
 
 `endif

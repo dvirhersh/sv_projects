@@ -14,7 +14,7 @@ module testbench();
 		end
 	end
 
-	cfs_apb_if apb_if (.pclk(clk));
+	cfs_apb_if apb_if(.pclk(clk));
 
 	initial begin
 		apb_if.preset_n = 1;
