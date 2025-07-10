@@ -32,28 +32,20 @@
 		endfunction
 
 		virtual function void set_active_passive(uvm_active_passive_enum value);
-			if (active_passive == null) begin
-				active_passive = value;
-			end else begin
-				`uvm_fatal("ALGORITHM_ISSUE",
-						   "Trying to set the APB virtual interface more than once")
-			end
+			active_passive = value;
 		endfunction
 
 		virtual function void start_of_simulation_phase(uvm_phase phase);
 			super.start_of_simulation_phase(phase);
 
 			if (get_vif() == null) begin
-			`uvm_fatal("ALGORITHM_ISSUE",
-					   "The APB virtual interface is not configured at
-					   \"Start of simulation\" phase")
+				`uvm_fatal("ALGORITHM_ISSUE", "The APB virtual interface is not configured at
+							\"Start of simulation\" phase")
 			end else begin
-			`uvm_info("APB_CONFIG",
-					  "The APB virtual interface is configured at \"Start of simulation\" phase",
-					  UVM_DEBUG)
+				`uvm_info("APB_CONFIG", "The APB virtual interface is configured at
+						  \"Start of simulation\" phase", UVM_DEBUG)
 			end
 		endfunction
-
 	endclass
 
 `endif
