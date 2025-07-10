@@ -7,7 +7,7 @@
 
 		`uvm_component_utils(cfs_algn_env)
 
-		function new(string name = "", uvm_component parent);
+		function new(input string name = "", uvm_component parent);
 			super.new(name, parent);
 		endfunction
 

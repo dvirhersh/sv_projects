@@ -5,7 +5,7 @@
 
         `uvm_object_utils(cfs_apb_item_base)
 
-        function new(string name = "");
+        function new(input string name = "");
             super.new(name);
         endfunction
 
