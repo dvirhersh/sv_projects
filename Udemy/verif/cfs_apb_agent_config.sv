@@ -3,8 +3,9 @@
 
 	class cfs_apb_agent_config extends uvm_component;
 
-		local cfs_apb_vif 			  vif;
+		local cfs_apb_vif 		      vif;
 		local uvm_active_passive_enum active_passive;
+		local bit 					  has_coverage;
 		local bit 					  has_checks;
 
 		//Number of clock cycles after which an APB transfer is considered
@@ -17,6 +18,7 @@
 			super.new(name, parent);
 
 			active_passive  = UVM_ACTIVE;
+			has_coverage    = 1;
 			has_checks      = 1;
 			stuck_threshold = 1000;
 		endfunction
@@ -43,6 +45,15 @@
 			active_passive = value;
 		endfunction
 
+		virtual function bit get_has_coverage();
+			return has_coverage;
+		endfunction
+
+		virtual function void set_has_coverage(bit value);
+			has_coverage = value;
+		endfunction
+
+		//Getter for the has_checks control field
 		virtual function bit get_has_checks();
 			return has_checks;
 		endfunction
