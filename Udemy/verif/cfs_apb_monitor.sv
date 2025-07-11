@@ -1,16 +1,15 @@
 `ifndef CFS_APB_MONITOR_SV
-    `define CFS_APB_MONITOR_SV
+  `define CFS_APB_MONITOR_SV
 
     class cfs_apb_monitor extends uvm_monitor;
 
         cfs_apb_agent_config agent_config;
 
-        //Port for sending the collected item
-        uvm_analysis_port #(cfs_apb_item_mon) output_port;
+        uvm_analysis_port#(cfs_apb_item_mon) output_port;
 
         `uvm_component_utils(cfs_apb_monitor)
 
-        function new(string name = "", uvm_component parent);
+        function new(input string name = "", uvm_component parent);
             super.new(name, parent);
 
             output_port = new("output_port", this);
@@ -44,6 +43,12 @@
             while (vif.pready !== 1) begin
                 @(posedge vif.pclk);
                 item.length++;
+
+                if(agent_config.get_has_checks()) begin
+                    if(item.length >= agent_config.get_stuck_threshold()) begin
+                        `uvm_error("PROTOCOL_ERROR", $sformatf("The APB transfer reached the stuck threshold value of %0d", item.length))
+                    end
+                end
             end
 
             item.response = cfs_apb_response'(vif.pslverr);

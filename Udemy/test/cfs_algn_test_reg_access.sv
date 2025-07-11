@@ -14,6 +14,12 @@
 
 			#(100ns);
 
+			// begin
+			// 	cfs_apb_vif vif = env.apb_agent.agent_config.get_vif();
+
+			// 	vif.has_checks = 0;
+			// end
+
 			fork
 				begin
 					cfs_apb_sequence_simple seq_simple = cfs_apb_sequence_simple::type_id::create("seq_simple");

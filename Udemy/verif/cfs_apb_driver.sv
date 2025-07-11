@@ -3,6 +3,7 @@
 
     class cfs_apb_driver extends uvm_driver#(.REQ(cfs_apb_item_drv));
 
+        //Pointer to agent configuration
         cfs_apb_agent_config agent_config;
 
         `uvm_component_utils(cfs_apb_driver)
