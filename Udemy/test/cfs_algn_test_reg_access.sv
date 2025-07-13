@@ -14,13 +14,25 @@
 
 			#(100ns);
 
-			// begin
-			// 	cfs_apb_vif vif = env.apb_agent.agent_config.get_vif();
-
-			// 	vif.has_checks = 0;
-			// end
-
 			fork
+				begin
+					cfs_apb_vif vif = env.apb_agent.agent_config.get_vif();
+
+					repeat(3) begin
+						@(posedge vif.psel);
+					end
+
+					#(11ns);
+
+					vif.preset_n <= 0;
+
+					repeat(4) begin
+						@(posedge vif.pclk);
+					end
+
+					vif.preset_n <= 1;
+
+				end
 				begin
 					cfs_apb_sequence_simple seq_simple = cfs_apb_sequence_simple::type_id::create("seq_simple");
 
@@ -36,7 +48,9 @@
 				begin
 					cfs_apb_sequence_rw seq_rw = cfs_apb_sequence_rw::type_id::create("seq_rw");
 
-					void'(seq_rw.randomize() with {addr == 'hC;});
+					void'(seq_rw.randomize() with {
+						addr == 'hC;
+					});
 
 					seq_rw.start(env.apb_agent.sequencer);
 				end
@@ -47,6 +61,14 @@
 					seq_random.start(env.apb_agent.sequencer);
 				end
 			join
+
+			begin
+				cfs_apb_sequence_random seq_random = cfs_apb_sequence_random::type_id::create("seq_random");
+				void'(seq_random.randomize() with {num_items == 3;});
+				seq_random.start(env.apb_agent.sequencer);
+			end
+
+			#(100ns);
 
 			`uvm_info("DEBUG", "end of test", UVM_LOW)
 

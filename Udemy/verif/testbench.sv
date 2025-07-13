@@ -1,6 +1,6 @@
 `include "../test/cfs_algn_test_pkg.sv"
 
-module testbench();
+module testbench ();
 
 	import uvm_pkg::*;
 	import cfs_algn_test_pkg::*;
@@ -14,11 +14,11 @@ module testbench();
 		end
 	end
 
-	cfs_apb_if apb_if(.pclk(clk));
+	cfs_apb_if apb_if (.pclk(clk));
 
 	initial begin
 		apb_if.preset_n = 1;
-		#6ns;
+		#3ns;
 		apb_if.preset_n = 0;
 		#30ns;
 		apb_if.preset_n = 1;
@@ -33,8 +33,8 @@ module testbench();
 		run_test("cfs_algn_test_reg_access");
 	end
 
-	cfs_aligner dut(
-		.clk(    clk),
+	cfs_aligner dut (
+		.clk    (clk),
 		.reset_n(apb_if.preset_n),
 
 		.paddr(  apb_if.paddr),

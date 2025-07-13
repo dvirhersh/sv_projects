@@ -72,7 +72,8 @@
             $error("PENABLE was not stable during \"Access Phase\"");
 
         property pwrite_stable_at_access_phase_p;
-            @(posedge pclk) disable iff (!preset_n || !has_checks) access_phase_s |-> $stable(pwrite);
+            @(posedge pclk) disable iff (!preset_n || !has_checks) 
+            access_phase_s |-> $stable(pwrite);
         endproperty
 
         PWRITE_STABLE_AT_ACCESS_PHASE_A :
@@ -100,12 +101,9 @@
         // assert property (pwdata_stable_at_access_phase_p)
         // else $error("PWDATA was not stable during \"Access Phase\"");
 
-
-
-
-
         property unknown_value_psel_p;
-            @(posedge pclk) disable iff (!preset_n || !has_checks) $isunknown(psel) == 0;
+            @(posedge pclk) disable iff (!preset_n || !has_checks) 
+            $isunknown(psel) == 0;
         endproperty
 
         UNKNOWN_VALUE_PSEL_A :
@@ -113,7 +111,8 @@
             $error("Detected unknown value for APB signal PSEL");
 
         property unknown_value_penable_p;
-            @(posedge pclk) disable iff (!preset_n || !has_checks) psel == 1 |-> $isunknown(penable) == 0;
+            @(posedge pclk) disable iff (!preset_n || !has_checks) 
+            psel == 1 |-> $isunknown(penable) == 0;
         endproperty
 
         UNKNOWN_VALUE_PENABLE_A :

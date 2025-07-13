@@ -3,7 +3,7 @@
 
 	class cfs_apb_agent_config extends uvm_component;
 
-		local cfs_apb_vif 		      vif;
+		local cfs_apb_vif 			  vif;
 		local uvm_active_passive_enum active_passive;
 		local bit 					  has_coverage;
 		local bit 					  has_checks;
@@ -18,7 +18,7 @@
 			super.new(name, parent);
 
 			active_passive  = UVM_ACTIVE;
-			has_coverage    = 1;
+			has_coverage    = 0;
 			has_checks      = 1;
 			stuck_threshold = 1000;
 		endfunction
@@ -102,6 +102,19 @@
 				end
 			end
 		endtask
+
+		virtual task wait_reset_start();
+			if(vif.preset_n !== 0) begin
+				@(negedge vif.preset_n);
+			end
+		endtask
+
+		virtual task wait_reset_end();
+			while(vif.preset_n == 0) begin
+				@(posedge vif.pclk);
+			end
+		endtask
+
 	endclass
 
 `endif

@@ -1,9 +1,9 @@
 `ifndef CFS_APB_AGENT_SV
 	`define CFS_APB_AGENT_SV
 
+	class cfs_apb_agent extends uvm_agent implements cfs_apb_reset_handler;
 
-	class cfs_apb_agent extends uvm_agent;
-
+		//Agent configuration handler
 		cfs_apb_agent_config agent_config;
 		cfs_apb_driver       driver;
 		cfs_apb_sequencer    sequencer;
@@ -59,6 +59,39 @@
 				driver.agent_config = agent_config;
 			end
 		endfunction
+
+		//Task for waiting the reset to start
+		protected virtual task wait_reset_start();
+			agent_config.wait_reset_start();
+		endtask
+
+		//Task for waiting the reset to be finished
+		protected virtual task wait_reset_end();
+			agent_config.wait_reset_end();
+		endtask
+
+		//Function to handle the reset
+		virtual function void handle_reset(uvm_phase phase);
+			uvm_component children[$];
+
+			get_children(children);
+
+			foreach(children[idx]) begin
+				cfs_apb_reset_handler reset_handler;
+
+				if($cast(reset_handler, children[idx])) begin
+					reset_handler.handle_reset(phase);
+				end
+			end
+		endfunction
+
+		virtual task run_phase(uvm_phase phase);
+			forever begin
+				wait_reset_start();
+				handle_reset(phase);
+				wait_reset_end();
+			end
+		endtask
 
 	endclass
 
