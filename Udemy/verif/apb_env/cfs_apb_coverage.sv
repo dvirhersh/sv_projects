@@ -5,7 +5,7 @@
 
     virtual class cfs_apb_cover_index_wrapper_base extends uvm_component;
 
-        function new(string name = "", uvm_component parent);
+        function new(input string name = "", uvm_component parent);
             super.new(name, parent);
         endfunction
 
@@ -35,7 +35,7 @@
             }
         endgroup
 
-        function new(string name = "", uvm_component parent);
+        function new(input string name = "", uvm_component parent);
             super.new(name, parent);
 
             cover_index = new();
@@ -132,7 +132,7 @@
             access_ongoing: coverpoint psel {option.comment = "An APB access was ongoing at reset";}
         endgroup
 
-        function new(string name = "", uvm_component parent);
+        function new(input string name = "", uvm_component parent);
             super.new(name, parent);
 
             port_item  = new("port_item", this);

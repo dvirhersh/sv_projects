@@ -5,7 +5,7 @@
 
 		`uvm_component_utils(cfs_algn_test_reg_access)
 
-		function new(input string name = "", uvm_component parent);
+		function new(string name = "", uvm_component parent);
 			super.new(name, parent);
 		endfunction
 
@@ -57,20 +57,28 @@
 
 				begin
 					cfs_apb_sequence_random seq_random = cfs_apb_sequence_random::type_id::create("seq_random");
-					void'(seq_random.randomize() with {num_items == 3;});
+
+					void'(seq_random.randomize() with {
+						num_items == 3;
+					});
+
 					seq_random.start(env.apb_agent.sequencer);
 				end
 			join
 
 			begin
 				cfs_apb_sequence_random seq_random = cfs_apb_sequence_random::type_id::create("seq_random");
-				void'(seq_random.randomize() with {num_items == 3;});
+
+				void'(seq_random.randomize() with {
+					num_items == 3;
+				});
+
 				seq_random.start(env.apb_agent.sequencer);
 			end
 
 			#(100ns);
 
-			`uvm_info("DEBUG", "end of test", UVM_LOW)
+			`uvm_info("DEBUG", "this is the end of the test", UVM_LOW)
 
 			phase.drop_objection(this, "TEST_DONE");
 		endtask

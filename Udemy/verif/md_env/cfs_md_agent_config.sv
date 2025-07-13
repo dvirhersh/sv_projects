@@ -1,12 +1,9 @@
 `ifndef CFS_MD_AGENT_CONFIG_SV
     `define CFS_MD_AGENT_CONFIG_SV
 
+    class cfs_md_agent_config#(int unsigned DATA_WIDTH = 32) extends uvm_component;
 
-    class cfs_md_agent_config #(
-        int unsigned DATA_WIDTH = 32
-    ) extends uvm_component;
-
-        typedef virtual cfs_md_if #(DATA_WIDTH) cfs_md_vif;
+        typedef virtual cfs_md_if#(DATA_WIDTH) cfs_md_vif;
 
         //Virtual interface
         local cfs_md_vif vif;
@@ -37,7 +34,7 @@
 
         //Setter for the MD virtual interface
         virtual function void set_vif(cfs_md_vif value);
-            if (vif == null) begin
+            if(vif == null) begin
                 vif = value;
 
                 set_has_checks(get_has_checks());
@@ -75,7 +72,7 @@
         virtual function void set_has_checks(bit value);
             has_checks = value;
 
-            if (vif != null) begin
+            if(vif != null) begin
                 vif.has_checks = has_checks;
             end
         endfunction
@@ -83,13 +80,10 @@
         virtual function void start_of_simulation_phase(uvm_phase phase);
             super.start_of_simulation_phase(phase);
 
-            if (get_vif() == null) begin
-                `uvm_fatal("ALGORITHM_ISSUE",
-                            "The MD virtual interface is not configured at \"Start of simulation\" phase")
+            if(get_vif() == null) begin
+                `uvm_fatal("ALGORITHM_ISSUE", "The MD virtual interface is not configured at \"Start of simulation\" phase")
             end else begin
-                `uvm_info("MD_CONFIG",
-                            "The MD virtual interface is configured at \"Start of simulation\" phase",
-                            UVM_DEBUG)
+                `uvm_info("MD_CONFIG", "The MD virtual interface is configured at \"Start of simulation\" phase", UVM_DEBUG)
             end
         endfunction
 
@@ -97,26 +91,22 @@
             forever begin
                 @(vif.has_checks);
 
-            if (vif.has_checks != get_has_checks()) begin
-                    `uvm_error(
-                        "ALGORITHM_ISSUE",
-                        $sformatf(
-                            "Can not change \"has_checks\" from MD interface directly - use %0s.set_has_checks()",
-                            get_full_name()))
+                if(vif.has_checks != get_has_checks()) begin
+                    `uvm_error("ALGORITHM_ISSUE", $sformatf("Can not change \"has_checks\" from MD interface directly - use %0s.set_has_checks()", get_full_name()))
                 end
             end
         endtask
 
         //Task for waiting the reset to start
         virtual task wait_reset_start();
-            if (vif.reset_n !== 0) begin
+            if(vif.reset_n !== 0) begin
                 @(negedge vif.reset_n);
             end
         endtask
 
         //Task for waiting the reset to be finished
         virtual task wait_reset_end();
-            while (vif.reset_n == 0) begin
+            while(vif.reset_n == 0) begin
                 @(posedge vif.clk);
             end
         endtask

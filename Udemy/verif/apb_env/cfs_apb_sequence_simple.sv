@@ -7,7 +7,7 @@
 
         `uvm_object_utils(cfs_apb_sequence_simple)
 
-        function new(string name = "");
+        function new(input string name = "");
             super.new(name);
             item = cfs_apb_item_drv::type_id::create("item");
         endfunction
