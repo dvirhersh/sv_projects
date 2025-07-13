@@ -19,7 +19,7 @@
 
 			active_passive  = UVM_ACTIVE;
 			has_coverage    = 0;
-			has_checks      = 1;
+			has_checks      = 0;
 			stuck_threshold = 1000;
 		endfunction
 

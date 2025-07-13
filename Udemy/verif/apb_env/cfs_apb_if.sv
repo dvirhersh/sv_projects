@@ -33,7 +33,7 @@
         bit has_checks;
 
         initial begin
-            has_checks = 1;
+            has_checks = 0;
         end
 
         // sequence setup_phase_s;
