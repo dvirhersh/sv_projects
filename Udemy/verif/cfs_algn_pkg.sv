@@ -2,7 +2,7 @@
 	`define CFS_ALGN_PKG_SV
 
 	`include "uvm_macros.svh"
-	`include "cfs_apb_pkg.sv"
+	`include "apb_env/cfs_apb_pkg.sv"
 
 	package cfs_algn_pkg;
 		import uvm_pkg::*;
