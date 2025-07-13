@@ -2,7 +2,7 @@
     `define CFS_MD_SEQUENCE_SIMPLE_MASTER_SV
 
 
-    class cfs_md_sequence_simple_master extends cfs_md_sequence_base #(cfs_md_item_drv_master);
+    class cfs_md_sequence_simple_master extends cfs_md_sequence_base_master;
 
         //Item to drive
         rand cfs_md_item_drv_master item;
@@ -11,7 +11,7 @@
             item.data.size() > 0;
             item.data.size() <= p_sequencer.get_data_width() / 8;
 
-            item.offset < p_sequencer.get_data_width() / 8;
+            item.offset      <  p_sequencer.get_data_width() / 8;
 
             item.data.size() + item.offset <= p_sequencer.get_data_width() / 8;
         }

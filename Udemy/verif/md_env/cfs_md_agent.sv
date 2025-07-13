@@ -12,7 +12,7 @@
         cfs_md_driver#(ITEM_DRV) driver;
 
         //Sequencer handler
-        cfs_md_sequencer#(ITEM_DRV) sequencer;
+        cfs_md_sequencer_base#(ITEM_DRV) sequencer;
 
         //Monitor handler
         cfs_md_monitor#(DATA_WIDTH) monitor;
@@ -31,7 +31,7 @@
 
             if(agent_config.get_active_passive() == UVM_ACTIVE) begin
                 driver    = cfs_md_driver#(ITEM_DRV)::type_id::create("driver", this);
-                sequencer = cfs_md_sequencer#(ITEM_DRV)::type_id::create("sequencer", this);
+                sequencer = cfs_md_sequencer_base#(ITEM_DRV)::type_id::create("sequencer", this);
             end
         endfunction
 
@@ -43,7 +43,8 @@
 
             if(!uvm_config_db#(cfs_md_vif)::get(this, "", vif_name, vif)) begin
                 `uvm_fatal("MD_NO_VIF", $sformatf("Could not get from the database the MD virtual interface using name \"%0s\"", vif_name))
-            end else begin
+            end
+            else begin
                 agent_config.set_vif(vif);
             end
 
